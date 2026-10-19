@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\Models"
   ],
-  "SelectedNode": "\\src\\appsettings.json",
+  "SelectedNode": "\\src\\Models\\Message.cs",
   "PreviewInSolutionExplorer": false
 }

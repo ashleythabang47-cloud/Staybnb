@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\Message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\GuestDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\GuestDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\CheckInProcess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\CheckInProcess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\Notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\Message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\WishlistItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,10 +47,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\PropertyImage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\GuestDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\GuestDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\ActivityLog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Models\\ActivityLog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -66,24 +66,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "HostApplication.cs",
               "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\HostApplication.cs",
               "RelativeDocumentMoniker": "src\\Models\\HostApplication.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\HostApplication.cs*",
-              "RelativeToolTip": "src\\Models\\HostApplication.cs*",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\HostApplication.cs",
+              "RelativeToolTip": "src\\Models\\HostApplication.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAADwvw4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:56:39.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:56:39.402Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "CheckInProcess.cs",
               "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\CheckInProcess.cs",
               "RelativeDocumentMoniker": "src\\Models\\CheckInProcess.cs",
@@ -91,116 +90,108 @@
               "RelativeToolTip": "src\\Models\\CheckInProcess.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAADwvw0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:49:36.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:49:36.998Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Message.cs",
               "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Message.cs",
               "RelativeDocumentMoniker": "src\\Models\\Message.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Message.cs*",
-              "RelativeToolTip": "src\\Models\\Message.cs*",
-              "ViewState": "AgIAAAQAAAAAAAAAAADwvw0AAAABAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Message.cs",
+              "RelativeToolTip": "src\\Models\\Message.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvwwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-16T16:56:14.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Notification.cs",
               "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Notification.cs",
               "RelativeDocumentMoniker": "src\\Models\\Notification.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Notification.cs*",
-              "RelativeToolTip": "src\\Models\\Notification.cs*",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Notification.cs",
+              "RelativeToolTip": "src\\Models\\Notification.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAADwvxAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:51:54.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "WishlistItem.cs",
-              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\WishlistItem.cs",
-              "RelativeDocumentMoniker": "src\\Models\\WishlistItem.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\WishlistItem.cs*",
-              "RelativeToolTip": "src\\Models\\WishlistItem.cs*",
-              "ViewState": "AgIAAAIAAAAAAAAAAADwvwsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:55:55.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:51:54.959Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Review.cs",
-              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Review.cs",
-              "RelativeDocumentMoniker": "src\\Models\\Review.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Review.cs*",
-              "RelativeToolTip": "src\\Models\\Review.cs*",
-              "ViewState": "AgIAAAYAAAAAAAAAAADwvw8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:55:40.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Amenity.cs",
-              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Amenity.cs",
-              "RelativeDocumentMoniker": "src\\Models\\Amenity.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Amenity.cs*",
-              "RelativeToolTip": "src\\Models\\Amenity.cs*",
+              "Title": "WishlistItem.cs",
+              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\WishlistItem.cs",
+              "RelativeDocumentMoniker": "src\\Models\\WishlistItem.cs",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\WishlistItem.cs",
+              "RelativeToolTip": "src\\Models\\WishlistItem.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAADwvwsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:50:17.347Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Booking.cs",
-              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Booking.cs",
-              "RelativeDocumentMoniker": "src\\Models\\Booking.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Booking.cs*",
-              "RelativeToolTip": "src\\Models\\Booking.cs*",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvxQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:49:24.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:55:55.675Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Payment.cs",
-              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Payment.cs",
-              "RelativeDocumentMoniker": "src\\Models\\Payment.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Payment.cs*",
-              "RelativeToolTip": "src\\Models\\Payment.cs*",
-              "ViewState": "AgIAAAQAAAAAAAAAAADwvw0AAAABAAAAAAAAAA==",
+              "Title": "Review.cs",
+              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Review.cs",
+              "RelativeDocumentMoniker": "src\\Models\\Review.cs",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Review.cs",
+              "RelativeToolTip": "src\\Models\\Review.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvw8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:51:13.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:55:40.479Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "PropertyImage.cs",
-              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\PropertyImage.cs",
-              "RelativeDocumentMoniker": "src\\Models\\PropertyImage.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\PropertyImage.cs*",
-              "RelativeToolTip": "src\\Models\\PropertyImage.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwkAAAABAAAAAAAAAA==",
+              "Title": "Amenity.cs",
+              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Amenity.cs",
+              "RelativeDocumentMoniker": "src\\Models\\Amenity.cs",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Amenity.cs",
+              "RelativeToolTip": "src\\Models\\Amenity.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAADwvwsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:54:29.366Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:50:17.347Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "src\\Models\\Booking.cs",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Booking.cs",
+              "RelativeToolTip": "src\\Models\\Booking.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAADwvxQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T16:49:24.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "src\\Models\\Payment.cs",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\Payment.cs",
+              "RelativeToolTip": "src\\Models\\Payment.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvw0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T16:51:13.379Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "PropertyImage.cs",
+              "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\PropertyImage.cs",
+              "RelativeDocumentMoniker": "src\\Models\\PropertyImage.cs",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\PropertyImage.cs",
+              "RelativeToolTip": "src\\Models\\PropertyImage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T16:54:29.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "GuestDocument.cs",
               "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\GuestDocument.cs",
               "RelativeDocumentMoniker": "src\\Models\\GuestDocument.cs",
@@ -208,8 +199,7 @@
               "RelativeToolTip": "src\\Models\\GuestDocument.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:52:22.441Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:52:22.441Z"
             },
             {
               "$type": "Document",
@@ -217,12 +207,11 @@
               "Title": "ActivityLog.cs",
               "DocumentMoniker": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\ActivityLog.cs",
               "RelativeDocumentMoniker": "src\\Models\\ActivityLog.cs",
-              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\ActivityLog.cs*",
-              "RelativeToolTip": "src\\Models\\ActivityLog.cs*",
+              "ToolTip": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Models\\ActivityLog.cs",
+              "RelativeToolTip": "src\\Models\\ActivityLog.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:53:14.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:53:14.429Z"
             },
             {
               "$type": "Document",
@@ -234,8 +223,7 @@
               "RelativeToolTip": "src\\Models\\ApplicationUser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T16:50:14.013Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T16:50:14.013Z"
             },
             {
               "$type": "Document",
@@ -247,8 +235,7 @@
               "RelativeToolTip": "src\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-10-16T15:01:00.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-16T15:01:00.229Z"
             }
           ]
         }
