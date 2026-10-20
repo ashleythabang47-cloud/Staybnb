@@ -1,0 +1,95 @@
+@model Staybnb.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1 class="h3 mb-4">Dashboard Overview</h1>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Total Users</div>
+            <div class="fs-2 fw-bold">@Model.TotalUsers</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Pending Host Apps</div>
+            <div class="fs-2 fw-bold text-warning">@Model.PendingApplications</div>
+            <a asp-action="Applications" asp-route-status="Pending" class="small">Require review</a>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Active Properties</div>
+            <div class="fs-2 fw-bold">@Model.ActiveProperties</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Platform Revenue</div>
+            <div class="fs-2 fw-bold">R @Model.PlatformRevenue.ToString("N0")</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Total Bookings</div>
+            <div class="fs-2 fw-bold">@Model.TotalBookings</div>
+            <span class="small text-muted">@Model.PendingBookings pending</span>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Approved Hosts</div>
+            <div class="fs-2 fw-bold">@Model.ApprovedHosts</div>
+        </div></div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header bg-white fw-semibold">Recent Host Applications</div>
+            <div class="table-responsive">
+                <table class="table mb-0 align-middle">
+                    <thead><tr><th>Applicant</th><th>Property</th><th>Date</th><th>Status</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var app in Model.RecentApplications)
+                    {
+                        <tr>
+                            <td>@app.ApplicationUser?.FullName<br /><span class="small text-muted">@app.ApplicationUser?.Email</span></td>
+                            <td>@app.Property?.Title</td>
+                            <td>@app.AppliedAt.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                            <td><span class="badge @(app.Status == Staybnb.Models.Enums.ApplicationStatus.Approved ? "bg-success" : app.Status == Staybnb.Models.Enums.ApplicationStatus.Rejected ? "bg-danger" : "bg-warning text-dark")">@app.Status</span></td>
+                            <td><a class="btn btn-sm btn-outline-dark" asp-action="ApplicationDetails" asp-route-id="@app.Id">View</a></td>
+                        </tr>
+                    }
+                    @if (!Model.RecentApplications.Any())
+                    {
+                        <tr><td colspan="5" class="text-muted text-center py-3">No applications yet.</td></tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header bg-white fw-semibold">Recent Activity</div>
+            <ul class="list-group list-group-flush">
+            @foreach (var log in Model.RecentActivity)
+            {
+                <li class="list-group-item">
+                    <div>@log.Action</div>
+                    <div class="small text-muted">@(log.User?.Email ?? "system") &middot; @log.ActivityType &middot; @log.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</div>
+                </li>
+            }
+            @if (!Model.RecentActivity.Any())
+            {
+                <li class="list-group-item text-muted text-center">No activity yet.</li>
+            }
+            </ul>
+        </div>
+    </div>
+</div>

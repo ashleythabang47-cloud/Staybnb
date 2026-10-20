@@ -1,0 +1,56 @@
+@model List<Staybnb.Models.HostApplication>
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Host Applications";
+    var current = ViewData["CurrentStatus"]?.ToString() ?? "All";
+}
+
+<h1 class="h3 mb-3">Host Applications</h1>
+
+<ul class="nav nav-pills mb-3">
+    @foreach (var tab in new[] { "All", "Pending", "Approved", "Rejected" })
+    {
+        <li class="nav-item">
+            <a class="nav-link @(current == tab ? "active bg-danger" : "text-dark")"
+               asp-action="Applications" asp-route-status="@(tab == "All" ? null : tab)">@tab</a>
+        </li>
+    }
+</ul>
+
+<div class="table-responsive">
+    <table class="table align-middle">
+        <thead>
+            <tr><th>Applicant</th><th>Property</th><th>City</th><th>Applied</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+        @foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.ApplicationUser?.FullName<br /><span class="small text-muted">@app.ApplicationUser?.Email</span></td>
+                <td>@app.Property?.Title</td>
+                <td>@app.Property?.City</td>
+                <td>@app.AppliedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    @switch (app.Status)
+                    {
+                        case ApplicationStatus.Approved:
+                            <span class="badge bg-success">Approved</span>
+                            break;
+                        case ApplicationStatus.Rejected:
+                            <span class="badge bg-danger">Rejected</span>
+                            break;
+                        default:
+                            <span class="badge bg-warning text-dark">Pending</span>
+                            break;
+                    }
+                </td>
+                <td><a class="btn btn-sm btn-outline-dark" asp-action="ApplicationDetails" asp-route-id="@app.Id">Review</a></td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="6" class="text-center text-muted py-4">No applications found.</td></tr>
+        }
+        </tbody>
+    </table>
+</div>

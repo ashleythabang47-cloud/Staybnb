@@ -1,0 +1,92 @@
+@model Staybnb.Models.HostApplication
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Review Application";
+    var property = Model.Property;
+}
+
+<a asp-action="Applications" class="text-decoration-none">&larr; Back to applications</a>
+
+<div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+    <h1 class="h3 mb-0">@property?.Title</h1>
+    @switch (Model.Status)
+    {
+        case ApplicationStatus.Approved:
+            <span class="badge bg-success fs-6">Approved</span>
+            break;
+        case ApplicationStatus.Rejected:
+            <span class="badge bg-danger fs-6">Rejected</span>
+            break;
+        default:
+            <span class="badge bg-warning text-dark fs-6">Pending</span>
+            break;
+    }
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="row g-2 mb-3">
+            @foreach (var image in property?.Images ?? new List<PropertyImage>())
+            {
+                <div class="col-6">
+                    <img src="@image.ImageUrl" alt="@property?.Title" class="img-fluid rounded" style="width:100%;height:180px;object-fit:cover" />
+                </div>
+            }
+        </div>
+        <h2 class="h5">Description</h2>
+        <p>@property?.Description</p>
+
+        <h2 class="h5">Amenities</h2>
+        @if (property != null && property.Amenities.Any())
+        {
+            foreach (var amenity in property.Amenities)
+            {
+                <span class="badge bg-light text-dark border me-1">@amenity.Name</span>
+            }
+        }
+        else
+        {
+            <p class="text-muted">None selected.</p>
+        }
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Property details</h2>
+                <dl class="row mb-0">
+                    <dt class="col-5">Type</dt><dd class="col-7">@property?.PropertyType</dd>
+                    <dt class="col-5">City</dt><dd class="col-7">@property?.City</dd>
+                    <dt class="col-5">Address</dt><dd class="col-7">@property?.Address</dd>
+                    <dt class="col-5">Max guests</dt><dd class="col-7">@property?.MaxGuests</dd>
+                    <dt class="col-5">Price / night</dt><dd class="col-7">R @property?.PricePerNight.ToString("N2")</dd>
+                    <dt class="col-5">Cleaning fee</dt><dd class="col-7">R @property?.CleaningFee.ToString("N2")</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Applicant</h2>
+                <div class="fw-semibold">@Model.ApplicationUser?.FullName</div>
+                <div class="text-muted">@Model.ApplicationUser?.Email</div>
+                <div class="small text-muted">Applied @Model.AppliedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</div>
+            </div>
+        </div>
+
+        @if (Model.Status == ApplicationStatus.Pending)
+        {
+            <form asp-action="Approve" asp-route-id="@Model.Id" method="post" class="mb-3">
+                <button type="submit" class="btn btn-success w-100">Approve application</button>
+            </form>
+
+            <form asp-action="Reject" asp-route-id="@Model.Id" method="post">
+                <div class="mb-2">
+                    <label for="reason" class="form-label small">Reason for rejection (optional)</label>
+                    <textarea id="reason" name="reason" class="form-control" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-danger w-100">Reject application</button>
+            </form>
+        }
+    </div>
+</div>
