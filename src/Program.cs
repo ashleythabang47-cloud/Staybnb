@@ -32,6 +32,7 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options =>
 
 // Our own services
 builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 builder.Services.AddControllersWithViews();
 
