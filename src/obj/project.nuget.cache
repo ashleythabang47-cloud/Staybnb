@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "woljQYFlZiY=",
+  "dgSpecHash": "vjcwajoU8cE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ashle\\Downloads\\Staybnb\\Staybnb.csproj",
+  "projectFilePath": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Staybnb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ashle\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\ashle\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

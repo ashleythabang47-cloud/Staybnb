@@ -25,6 +25,12 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Seed roles, the SuperAdmin and default data on startup
+using (var scope = app.Services.CreateScope())
+{
+    await RoleSeeder.SeedAsync(scope.ServiceProvider);
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

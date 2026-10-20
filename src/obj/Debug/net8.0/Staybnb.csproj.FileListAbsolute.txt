@@ -304,7 +304,6 @@ C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\staticweba
 C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\Staybnb.csproj.Up2Date
 C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\Staybnb.dll
 C:\Users\ashle\OneDrive\Documents\GitHub\Staybnb\src\obj\Debug\net8.0\refint\Staybnb.dll

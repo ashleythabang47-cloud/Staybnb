@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ashle\\Downloads\\Staybnb\\Staybnb.csproj": {}
+    "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Staybnb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ashle\\Downloads\\Staybnb\\Staybnb.csproj": {
+    "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Staybnb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ashle\\Downloads\\Staybnb\\Staybnb.csproj",
+        "projectUniqueName": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Staybnb.csproj",
         "projectName": "Staybnb",
-        "projectPath": "C:\\Users\\ashle\\Downloads\\Staybnb\\Staybnb.csproj",
+        "projectPath": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\Staybnb.csproj",
         "packagesPath": "C:\\Users\\ashle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ashle\\Downloads\\Staybnb\\obj\\",
+        "outputPath": "C:\\Users\\ashle\\OneDrive\\Documents\\GitHub\\Staybnb\\src\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
