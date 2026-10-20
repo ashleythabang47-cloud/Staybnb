@@ -190,5 +190,146 @@ namespace Staybnb.Controllers
             TempData["Success"] = "Application rejected.";
             return RedirectToAction(nameof(Applications));
         }
+
+        // ---------- User management (SuperAdmin only) ----------
+
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> Users(string? search)
+        {
+            var query = _userManager.Users.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var term = search.Trim();
+                query = query.Where(u =>
+                    (u.Email != null && u.Email.Contains(term)) ||
+                    u.FirstName.Contains(term) ||
+                    u.LastName.Contains(term));
+            }
+
+            var users = await query.OrderBy(u => u.FirstName).ThenBy(u => u.LastName).ToListAsync();
+
+            var roleMap = await (from ur in _db.UserRoles
+                                 join r in _db.Roles on ur.RoleId equals r.Id
+                                 select new { ur.UserId, RoleName = r.Name })
+                                .ToListAsync();
+
+            var rows = users.Select(u => new UserRowViewModel
+            {
+                User = u,
+                Roles = roleMap.Where(x => x.UserId == u.Id)
+                               .Select(x => x.RoleName ?? "")
+                               .ToList()
+            }).ToList();
+
+            ViewData["Search"] = search;
+            return View(rows);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PromoteToAdmin(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            // Only existing Guests can be promoted
+            if (!await _userManager.IsInRoleAsync(user, "Guest"))
+            {
+                TempData["Error"] = "Only Guests can be promoted to Admin.";
+                return RedirectToAction(nameof(Users));
+            }
+
+            var add = await _userManager.AddToRoleAsync(user, "Admin");
+            if (!add.Succeeded)
+            {
+                TempData["Error"] = "Could not promote the user: " +
+                    string.Join(", ", add.Errors.Select(e => e.Description));
+                return RedirectToAction(nameof(Users));
+            }
+
+            await _userManager.RemoveFromRoleAsync(user, "Guest");
+
+            var actorId = _userManager.GetUserId(User);
+            await _log.LogAsync(actorId, $"Promoted {user.Email} to Admin", ActivityType.RoleChange);
+            await _log.LogAsync(user.Id, "Role changed: Guest to Admin", ActivityType.RoleChange);
+            await _notifications.NotifyAsync(user.Id, "You are now an Admin",
+                "A SuperAdmin promoted your account to Admin.", NotificationType.Success);
+
+            TempData["Success"] = $"{user.FullName} is now an Admin.";
+            return RedirectToAction(nameof(Users));
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DemoteAdmin(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            // The SuperAdmin account can never be demoted
+            if (await _userManager.IsInRoleAsync(user, "SuperAdmin") ||
+                !await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                TempData["Error"] = "Only regular Admins can be demoted.";
+                return RedirectToAction(nameof(Users));
+            }
+
+            await _userManager.RemoveFromRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(user, "Guest");
+
+            var actorId = _userManager.GetUserId(User);
+            await _log.LogAsync(actorId, $"Demoted {user.Email} to Guest", ActivityType.RoleChange);
+            await _log.LogAsync(user.Id, "Role changed: Admin to Guest", ActivityType.RoleChange);
+            await _notifications.NotifyAsync(user.Id, "Admin role removed",
+                "Your Admin role was removed and your account is now a Guest.", NotificationType.Warning);
+
+            TempData["Success"] = $"{user.FullName} is now a Guest.";
+            return RedirectToAction(nameof(Users));
+        }
+
+        // ---------- System audit ----------
+
+        public async Task<IActionResult> ActivityLogs(string? type, string? search, int page = 1)
+        {
+            const int pageSize = 25;
+            if (page < 1) page = 1;
+
+            var query = _db.ActivityLogs.Include(l => l.User).AsQueryable();
+
+            if (Enum.TryParse<ActivityType>(type, true, out var parsed))
+                query = query.Where(l => l.ActivityType == parsed);
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var term = search.Trim();
+                query = query.Where(l => l.Action.Contains(term) ||
+                                         (l.User != null && l.User.Email != null && l.User.Email.Contains(term)));
+            }
+
+            var total = await query.CountAsync();
+
+            var logs = await query
+                .OrderByDescending(l => l.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var model = new ActivityLogsViewModel
+            {
+                Logs = logs,
+                Type = type,
+                Search = search,
+                Page = page,
+                TotalPages = Math.Max(1, (int)Math.Ceiling(total / (double)pageSize)),
+                TotalCount = total
+            };
+
+            return View(model);
+        }
     }
 }

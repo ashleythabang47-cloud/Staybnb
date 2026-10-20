@@ -1,0 +1,61 @@
+@model List<Staybnb.ViewModels.UserRowViewModel>
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h1 class="h3 mb-1">User Management</h1>
+<p class="text-muted">Only a SuperAdmin can promote Guests to Admin.</p>
+
+<form method="get" asp-action="Users" class="row g-2 mb-3">
+    <div class="col-md-6">
+        <input type="text" name="search" value="@ViewData["Search"]" class="form-control" placeholder="Search by name or email" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-dark">Search</button>
+        <a asp-action="Users" class="btn btn-outline-secondary">Clear</a>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table align-middle">
+        <thead>
+            <tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th></th></tr>
+        </thead>
+        <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>@row.User.FullName</td>
+                <td>@row.User.Email</td>
+                <td>
+                    @foreach (var role in row.Roles)
+                    {
+                        <span class="badge @(role == "SuperAdmin" ? "bg-dark" : role == "Admin" ? "bg-primary" : role == "Host" ? "bg-success" : "bg-secondary")">@role</span>
+                    }
+                </td>
+                <td>@row.User.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                <td class="text-end">
+                    @if (row.Roles.Contains("Guest"))
+                    {
+                        <form asp-action="PromoteToAdmin" asp-route-id="@row.User.Id" method="post" class="d-inline"
+                              onsubmit="return confirm('Promote this user to Admin?');">
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Promote to Admin</button>
+                        </form>
+                    }
+                    else if (row.Roles.Contains("Admin") && !row.Roles.Contains("SuperAdmin"))
+                    {
+                        <form asp-action="DemoteAdmin" asp-route-id="@row.User.Id" method="post" class="d-inline"
+                              onsubmit="return confirm('Remove Admin role from this user?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Remove Admin</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="5" class="text-center text-muted py-4">No users found.</td></tr>
+        }
+        </tbody>
+    </table>
+</div>
