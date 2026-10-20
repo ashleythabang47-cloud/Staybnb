@@ -1,0 +1,70 @@
+@model List<Staybnb.Models.Booking>
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h1 class="h3 mb-3">My Bookings</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-light border">
+        You have no bookings yet. <a asp-controller="Home" asp-action="Index">Browse properties</a>.
+    </div>
+}
+
+@foreach (var b in Model)
+{
+    var image = b.Property?.Images.FirstOrDefault();
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row align-items-center g-3">
+                <div class="col-md-2">
+                    @if (image != null)
+                    {
+                        <img src="@image.ImageUrl" alt="@b.Property?.Title" class="img-fluid rounded" style="width:100%;height:90px;object-fit:cover" />
+                    }
+                </div>
+                <div class="col-md-5">
+                    <a asp-controller="Properties" asp-action="Details" asp-route-id="@b.PropertyId" class="h5 text-decoration-none text-dark">@b.Property?.Title</a>
+                    <div class="text-muted small">@b.Property?.City</div>
+                    <div class="small mt-1">@b.CheckInDate.ToString("dd MMM yyyy") to @b.CheckOutDate.ToString("dd MMM yyyy") &middot; @b.NumberOfGuests guest(s)</div>
+                </div>
+                <div class="col-md-2">
+                    <div class="fw-bold">R @b.TotalPrice.ToString("N2")</div>
+                    @switch (b.Status)
+                    {
+                        case BookingStatus.Approved:
+                            <span class="badge bg-success">Approved</span>
+                            break;
+                        case BookingStatus.Rejected:
+                            <span class="badge bg-danger">Rejected</span>
+                            break;
+                        case BookingStatus.CheckedIn:
+                            <span class="badge bg-primary">Checked in</span>
+                            break;
+                        case BookingStatus.Cancelled:
+                            <span class="badge bg-secondary">Cancelled</span>
+                            break;
+                        case BookingStatus.Completed:
+                            <span class="badge bg-dark">Completed</span>
+                            break;
+                        default:
+                            <span class="badge bg-warning text-dark">Pending</span>
+                            break;
+                    }
+                </div>
+                <div class="col-md-3 text-md-end">
+                    @if (b.Status == BookingStatus.Pending)
+                    {
+                        <form asp-action="Cancel" asp-route-id="@b.Id" method="post" class="d-inline"
+                              onsubmit="return confirm('Cancel this booking request?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Cancel request</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

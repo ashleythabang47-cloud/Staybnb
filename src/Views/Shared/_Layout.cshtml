@@ -52,6 +52,9 @@
                         @if (User.IsInRole("Guest"))
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Bookings" asp-action="Index">My Bookings</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="HostApplications" asp-action="Create">Become a Host</a>
                             </li>
                             <li class="nav-item">
