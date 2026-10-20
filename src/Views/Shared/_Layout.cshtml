@@ -40,6 +40,15 @@
                                 <a class="nav-link text-dark" asp-controller="Admin" asp-action="Users">Users</a>
                             </li>
                         }
+                        @if (User.IsInRole("Host"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Host" asp-action="Dashboard">Host Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Host" asp-action="Properties">My Properties</a>
+                            </li>
+                        }
                         @if (User.IsInRole("Guest"))
                         {
                             <li class="nav-item">

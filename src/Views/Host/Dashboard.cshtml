@@ -1,0 +1,68 @@
+@model Staybnb.ViewModels.HostDashboardViewModel
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Host Dashboard";
+}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h1 class="h4 text-danger mb-1">Welcome back, @Model.HostName!</h1>
+        <p class="text-muted">Here's what's happening with your properties today.</p>
+        <a class="btn btn-outline-danger btn-sm" asp-action="Properties">My Properties</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Total Properties</div>
+            <div class="fs-2 fw-bold">@Model.TotalProperties</div>
+            <span class="small text-success">@Model.ActiveProperties active</span>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Total Bookings</div>
+            <div class="fs-2 fw-bold">@Model.TotalBookings</div>
+            <span class="small text-warning">@Model.PendingBookings pending</span>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Total Earnings</div>
+            <div class="fs-2 fw-bold">R @Model.TotalEarnings.ToString("N0")</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+            <div class="text-muted small">Average Rating</div>
+            <div class="fs-2 fw-bold">@(Model.AverageRating.HasValue ? Model.AverageRating.Value.ToString("0.0") : "0.0")</div>
+            <span class="small text-muted">@Model.ReviewCount reviews</span>
+        </div></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white fw-semibold">Recent Bookings</div>
+    <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+            <thead><tr><th>Guest</th><th>Property</th><th>Dates</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody>
+            @foreach (var b in Model.RecentBookings)
+            {
+                <tr>
+                    <td>@b.Guest?.FullName</td>
+                    <td>@b.Property?.Title</td>
+                    <td>@b.CheckInDate.ToString("dd MMM") to @b.CheckOutDate.ToString("dd MMM yyyy")</td>
+                    <td>R @b.TotalPrice.ToString("N2")</td>
+                    <td><span class="badge bg-light text-dark border">@b.Status</span></td>
+                </tr>
+            }
+            @if (!Model.RecentBookings.Any())
+            {
+                <tr><td colspan="5" class="text-center text-muted py-3">No bookings yet.</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

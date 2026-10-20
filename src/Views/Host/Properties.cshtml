@@ -1,0 +1,68 @@
+@model List<Staybnb.ViewModels.PropertyRowViewModel>
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "My Properties";
+}
+
+<h1 class="h3 mb-3">My Properties</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-light border">You have no properties yet.</div>
+}
+
+@foreach (var row in Model)
+{
+    var p = row.Property;
+    var image = p.Images.FirstOrDefault();
+    var approved = row.ApprovalStatus == null || row.ApprovalStatus == ApplicationStatus.Approved;
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row align-items-center g-3">
+                <div class="col-md-3">
+                    @if (image != null)
+                    {
+                        <img src="@image.ImageUrl" alt="@p.Title" class="img-fluid rounded" style="width:100%;height:130px;object-fit:cover" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h5 mb-1">@p.Title</h2>
+                    <div class="text-muted small">@p.City &middot; @p.PropertyType &middot; up to @p.MaxGuests guests</div>
+                    <div class="mt-2">
+                        <span class="badge bg-light text-dark border">@row.BookingCount booking(s)</span>
+                        @if (row.ApprovalStatus == ApplicationStatus.Pending)
+                        {
+                            <span class="badge bg-warning text-dark">Pending approval</span>
+                        }
+                        else if (row.ApprovalStatus == ApplicationStatus.Rejected)
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                        else if (p.IsActive)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactive</span>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-3 text-md-end">
+                    <div class="fs-5 fw-bold">R @p.PricePerNight.ToString("N2")<span class="fs-6 fw-normal text-muted"> / night</span></div>
+                    <div class="mt-2 d-flex gap-1 flex-wrap justify-content-md-end">
+                        <a class="btn btn-sm btn-outline-dark" asp-action="Edit" asp-route-id="@p.Id">Edit</a>
+                        <a class="btn btn-sm btn-outline-dark" asp-action="ConfigureCheckIn" asp-route-id="@p.Id">Check-in</a>
+                        @if (approved)
+                        {
+                            <form asp-action="ToggleActive" asp-route-id="@p.Id" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm @(p.IsActive ? "btn-danger" : "btn-success")">@(p.IsActive ? "Deactivate" : "Activate")</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
