@@ -42,6 +42,10 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     await RoleSeeder.SeedAsync(scope.ServiceProvider);
+
+    // Demo users, properties, bookings and messages (set "SeedDemoData": false to turn off)
+    if (app.Configuration.GetValue<bool>("SeedDemoData", true))
+        await DemoDataSeeder.SeedAsync(scope.ServiceProvider);
 }
 
 // Configure the HTTP request pipeline.
