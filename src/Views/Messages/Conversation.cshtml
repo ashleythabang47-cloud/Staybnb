@@ -1,0 +1,42 @@
+@model Staybnb.ViewModels.ConversationViewModel
+@{
+    ViewData["Title"] = "Conversation";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <a asp-action="Index" class="text-decoration-none">&larr; Back to inbox</a>
+        <h1 class="h4 mt-2 mb-3">@Model.OtherUser.FullName
+            <span class="small text-muted fw-normal">@Model.OtherUser.Email</span>
+        </h1>
+
+        <div class="border rounded p-3 mb-3" style="min-height:240px;max-height:480px;overflow-y:auto">
+            @if (!Model.Messages.Any())
+            {
+                <div class="text-muted text-center py-5">No messages yet. Say hello below.</div>
+            }
+            @foreach (var m in Model.Messages)
+            {
+                var mine = m.SenderId == Model.CurrentUserId;
+                <div class="d-flex @(mine ? "justify-content-end" : "justify-content-start") mb-2">
+                    <div class="px-3 py-2 rounded-3 @(mine ? "bg-danger text-white" : "bg-light")" style="max-width:75%">
+                        <div style="white-space:pre-line">@m.Content</div>
+                        <div class="small @(mine ? "text-white-50" : "text-muted") mt-1">@m.Timestamp.ToLocalTime().ToString("dd MMM HH:mm")</div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <form asp-controller="Messages" asp-action="Send" method="post">
+            <input type="hidden" name="toUserId" value="@Model.OtherUser.Id" />
+            @if (Model.PropertyId.HasValue)
+            {
+                <input type="hidden" name="propertyId" value="@Model.PropertyId" />
+            }
+            <div class="mb-2">
+                <textarea name="content" class="form-control" rows="3" maxlength="2000" placeholder="Write a message..." required>@Model.Draft</textarea>
+            </div>
+            <button type="submit" class="btn btn-danger">Send</button>
+        </form>
+    </div>
+</div>

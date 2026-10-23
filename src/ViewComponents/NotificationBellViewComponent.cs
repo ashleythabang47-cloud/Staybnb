@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Staybnb.Data;
 using Staybnb.Models;
+using Staybnb.ViewModels;
 
 namespace Staybnb.ViewComponents
 {
-    // Shows the bell icon with the number of unread notifications in the navbar
+    // Navbar icons: the bell (unread notifications) and the envelope (unread messages)
     public class NotificationBellViewComponent : ViewComponent
     {
         private readonly ApplicationDbContext _db;
@@ -20,13 +21,18 @@ namespace Staybnb.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            var model = new NavCountsViewModel();
             var userId = _userManager.GetUserId(UserClaimsPrincipal);
-            var unread = 0;
 
             if (userId != null)
-                unread = await _db.Notifications.CountAsync(n => n.UserId == userId && !n.IsRead);
+            {
+                model.UnreadNotifications = await _db.Notifications
+                    .CountAsync(n => n.UserId == userId && !n.IsRead);
+                model.UnreadMessages = await _db.Messages
+                    .CountAsync(m => m.ReceiverId == userId && !m.IsRead);
+            }
 
-            return View(unread);
+            return View(model);
         }
     }
 }

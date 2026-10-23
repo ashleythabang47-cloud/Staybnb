@@ -113,6 +113,8 @@ namespace Staybnb.Controllers
                     if (isHost) return Url.Action("BookingRequests", "Host");
                     if (isGuest) return Url.Action("Index", "Bookings");
                     break;
+                case NotificationType.Message:
+                    return Url.Action("Index", "Messages");
                 case NotificationType.Application:
                     if (isAdmin) return Url.Action("Applications", "Admin");
                     if (isGuest) return Url.Action("Status", "HostApplications");

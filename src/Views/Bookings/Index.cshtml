@@ -56,6 +56,9 @@
                     }
                 </div>
                 <div class="col-md-3 text-md-end">
+                    <a class="btn btn-sm btn-outline-dark mb-1" asp-controller="Messages" asp-action="Conversation"
+                       asp-route-id="@b.Property?.HostId" asp-route-propertyId="@b.PropertyId">Message host</a>
+                    <br />
                     @if (b.Status == BookingStatus.Approved)
                     {
                         var ci = b.GuestCheckIn;

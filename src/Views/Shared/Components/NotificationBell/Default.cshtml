@@ -1,11 +1,20 @@
-@model int
+@model Staybnb.ViewModels.NavCountsViewModel
 
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-controller="Messages" asp-action="Index" title="Messages">
+        &#9993;
+        @if (Model.UnreadMessages > 0)
+        {
+            <span class="badge rounded-pill bg-danger">@Model.UnreadMessages</span>
+        }
+    </a>
+</li>
 <li class="nav-item">
     <a class="nav-link text-dark" asp-controller="Notifications" asp-action="Index" title="Notifications">
         &#128276;
-        @if (Model > 0)
+        @if (Model.UnreadNotifications > 0)
         {
-            <span class="badge rounded-pill bg-danger">@Model</span>
+            <span class="badge rounded-pill bg-danger">@Model.UnreadNotifications</span>
         }
     </a>
 </li>
