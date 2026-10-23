@@ -1,4 +1,4 @@
-# Staybnb: Airbnb clone (Programming 742)
+# Staybnb: Airbnb 
 
 Staybnb is a managed property rental platform built with **ASP.NET Core MVC (.NET 8)**, **Entity Framework Core** and **SQL Server**. It models the full user lifecycle: a user registers as a **Guest**, applies to become a **Host**, and **Administrators** review applications and keep the marketplace secure.
 
