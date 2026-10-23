@@ -1,0 +1,11 @@
+@model int
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-controller="Notifications" asp-action="Index" title="Notifications">
+        &#128276;
+        @if (Model > 0)
+        {
+            <span class="badge rounded-pill bg-danger">@Model</span>
+        }
+    </a>
+</li>

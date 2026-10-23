@@ -48,6 +48,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Host" asp-action="Properties">My Properties</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Host" asp-action="BookingRequests">Booking Requests</a>
+                            </li>
                         }
                         @if (User.IsInRole("Guest"))
                         {
@@ -62,6 +65,12 @@
                             </li>
                         }
                     </ul>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <ul class="navbar-nav">
+                            @await Component.InvokeAsync("NotificationBell")
+                        </ul>
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>

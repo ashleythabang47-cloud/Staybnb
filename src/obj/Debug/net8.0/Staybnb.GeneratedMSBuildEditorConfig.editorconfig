@@ -27,12 +27,88 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Admin/ActivityLogs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWN0aXZpdHlMb2dzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Admin/ApplicationDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXBwbGljYXRpb25EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Admin/Applications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQXBwbGljYXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Admin/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Bookings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/HostApplications/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdEFwcGxpY2F0aW9uc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/HostApplications/Status.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdEFwcGxpY2F0aW9uc1xTdGF0dXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/BookingRequests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxCb29raW5nUmVxdWVzdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/ConfigureCheckIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxDb25maWd1cmVDaGVja0luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/Properties.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxQcm9wZXJ0aWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Notifications/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Properties/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Shared/Components/NotificationBell/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTm90aWZpY2F0aW9uQmVsbFxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Shared/Error.cshtml]

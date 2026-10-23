@@ -17,15 +17,18 @@ namespace Staybnb.Controllers
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IActivityLogService _log;
+        private readonly INotificationService _notifications;
 
         public HostController(
             ApplicationDbContext db,
             UserManager<ApplicationUser> userManager,
-            IActivityLogService log)
+            IActivityLogService log,
+            INotificationService notifications)
         {
             _db = db;
             _userManager = userManager;
             _log = log;
+            _notifications = notifications;
         }
 
         // ---------- Dashboard ----------
@@ -277,6 +280,111 @@ namespace Staybnb.Controllers
 
             TempData["Success"] = "Check-in process saved.";
             return RedirectToAction(nameof(Properties));
+        }
+
+        // ---------- Booking requests ----------
+
+        public async Task<IActionResult> BookingRequests(string? status)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            var query = _db.Bookings
+                .Include(b => b.Guest)
+                .Include(b => b.Property)
+                .Include(b => b.Payment)
+                .Where(b => b.Property!.HostId == hostId);
+
+            if (Enum.TryParse<BookingStatus>(status, true, out var parsed))
+                query = query.Where(b => b.Status == parsed);
+
+            ViewData["CurrentStatus"] = status ?? "All";
+
+            var bookings = await query.OrderByDescending(b => b.Id).ToListAsync();
+            return View(bookings);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApproveBooking(int id)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            // Ownership check: the booking must be for one of this host's properties
+            var booking = await _db.Bookings
+                .Include(b => b.Property)
+                .Include(b => b.Payment)
+                .FirstOrDefaultAsync(b => b.Id == id && b.Property!.HostId == hostId);
+
+            if (booking == null)
+                return NotFound();
+
+            if (booking.Status != BookingStatus.Pending)
+            {
+                TempData["Error"] = "Only pending requests can be approved.";
+                return RedirectToAction(nameof(BookingRequests));
+            }
+
+            // The dates may have been taken since the request was made
+            var overlap = await _db.Bookings.AnyAsync(b =>
+                b.Id != booking.Id &&
+                b.PropertyId == booking.PropertyId &&
+                (b.Status == BookingStatus.Approved || b.Status == BookingStatus.CheckedIn) &&
+                b.CheckInDate < booking.CheckOutDate && b.CheckOutDate > booking.CheckInDate);
+
+            if (overlap)
+            {
+                TempData["Error"] = "These dates overlap with a booking you already approved.";
+                return RedirectToAction(nameof(BookingRequests));
+            }
+
+            booking.Status = BookingStatus.Approved;
+            if (booking.Payment != null)
+                booking.Payment.Status = PaymentStatus.Paid; // simulated payment
+
+            await _db.SaveChangesAsync();
+
+            await _log.LogAsync(hostId, $"Booking #{booking.Id} approved", ActivityType.BookingStatusChange);
+            await _notifications.NotifyAsync(booking.GuestId, "Booking Approved",
+                $"Your booking for '{booking.Property?.Title}' ({booking.CheckInDate:dd MMM} to {booking.CheckOutDate:dd MMM yyyy}) was approved. You can now start your check-in.",
+                NotificationType.Success);
+
+            TempData["Success"] = "Booking approved.";
+            return RedirectToAction(nameof(BookingRequests));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectBooking(int id)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            var booking = await _db.Bookings
+                .Include(b => b.Property)
+                .Include(b => b.Payment)
+                .FirstOrDefaultAsync(b => b.Id == id && b.Property!.HostId == hostId);
+
+            if (booking == null)
+                return NotFound();
+
+            if (booking.Status != BookingStatus.Pending)
+            {
+                TempData["Error"] = "Only pending requests can be rejected.";
+                return RedirectToAction(nameof(BookingRequests));
+            }
+
+            booking.Status = BookingStatus.Rejected;
+            if (booking.Payment != null)
+                booking.Payment.Status = PaymentStatus.Failed; // the payment is never taken
+
+            await _db.SaveChangesAsync();
+
+            await _log.LogAsync(hostId, $"Booking #{booking.Id} rejected", ActivityType.BookingStatusChange);
+            await _notifications.NotifyAsync(booking.GuestId, "Booking Rejected",
+                $"Unfortunately your request for '{booking.Property?.Title}' was not accepted.",
+                NotificationType.Warning);
+
+            TempData["Success"] = "Booking rejected.";
+            return RedirectToAction(nameof(BookingRequests));
         }
 
         // ---------- helpers ----------
