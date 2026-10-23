@@ -1,0 +1,51 @@
+@model Staybnb.ViewModels.CheckInFlowViewModel
+@{
+    ViewData["Title"] = "Check-in: house rules";
+    var b = Model.Booking;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h3 mb-1">Check-in</h1>
+        <p class="text-muted">@b.Property?.Title &middot; @b.CheckInDate.ToString("dd MMM") to @b.CheckOutDate.ToString("dd MMM yyyy")</p>
+
+        <partial name="_Steps" model="1" />
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2 class="h5">House rules</h2>
+                @if (Model.Config.Rules.Any())
+                {
+                    <ul>
+                        @foreach (var rule in Model.Config.Rules)
+                        {
+                            <li>@rule</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">The host has not added special rules. Please respect the property and its neighbours.</p>
+                }
+
+                <h2 class="h5 mt-4">Documents you will need</h2>
+                <ul class="mb-0">
+                    @foreach (var d in Model.Config.Documents)
+                    {
+                        <li>@d</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <form asp-controller="CheckIn" asp-action="Start" method="post">
+            <input type="hidden" name="bookingId" value="@b.Id" />
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" name="agree" value="true" id="agree" required />
+                <label class="form-check-label" for="agree">I have read and accept the house rules.</label>
+            </div>
+            <button type="submit" class="btn btn-danger">Continue to documents</button>
+            <a class="btn btn-outline-secondary" asp-controller="Bookings" asp-action="Index">Back</a>
+        </form>
+    </div>
+</div>

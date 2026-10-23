@@ -1,0 +1,62 @@
+@model Staybnb.ViewModels.CheckInFlowViewModel
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Check-in: documents";
+    var b = Model.Booking;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h3 mb-1">Upload your documents</h1>
+        <p class="text-muted">@b.Property?.Title &middot; @b.CheckInDate.ToString("dd MMM") to @b.CheckOutDate.ToString("dd MMM yyyy")</p>
+
+        <partial name="_Steps" model="2" />
+
+        @if (Model.CheckIn?.Status == CheckInStatus.Rejected)
+        {
+            <div class="alert alert-warning">Your host rejected a document. Please upload a clearer copy of the rejected item.</div>
+        }
+
+        <form asp-controller="CheckIn" asp-action="Documents" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="bookingId" value="@b.Id" />
+
+            @for (var i = 0; i < Model.Config.Documents.Count; i++)
+            {
+                var type = Model.Config.Documents[i];
+                var existing = Model.CheckIn?.Documents.FirstOrDefault(d => d.DocumentType == type);
+                var locked = existing != null && existing.Status == DocumentStatus.Verified;
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label fw-semibold" for="@("doc_" + i)">@type</label>
+                            @if (existing != null)
+                            {
+                                <span class="badge @(existing.Status == DocumentStatus.Verified ? "bg-success" : existing.Status == DocumentStatus.Rejected ? "bg-danger" : "bg-warning text-dark")">@existing.Status</span>
+                            }
+                        </div>
+
+                        @if (locked)
+                        {
+                            <div class="text-muted small">Verified by the host. No change needed.</div>
+                        }
+                        else
+                        {
+                            <input type="file" class="form-control" id="@("doc_" + i)" name="@("doc_" + i)" accept=".jpg,.jpeg,.png,.pdf" />
+                            <div class="form-text">
+                                JPG, PNG or PDF, up to 5 MB.
+                                @if (existing != null)
+                                {
+                                    <span>A file is already uploaded (<a asp-controller="GuestDocuments" asp-action="Download" asp-route-id="@existing.Id" target="_blank">view</a>). Choose a new one only to replace it.</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <button type="submit" class="btn btn-danger">Save and continue</button>
+            <a class="btn btn-outline-secondary" asp-action="Summary" asp-route-bookingId="@b.Id">Skip to review</a>
+        </form>
+    </div>
+</div>

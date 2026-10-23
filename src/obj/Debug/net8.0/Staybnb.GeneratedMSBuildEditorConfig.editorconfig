@@ -63,6 +63,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/CheckIn/Documents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJblxEb2N1bWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/CheckIn/Start.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJblxTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/CheckIn/Summary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJblxTdW1tYXJ5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/CheckIn/_Steps.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tJblxfU3RlcHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -83,6 +99,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxCb29raW5nUmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/CheckIns.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxDaGVja0lucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/ConfigureCheckIn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxDb25maWd1cmVDaGVja0luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -97,6 +117,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/Properties.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxQcm9wZXJ0aWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Host/ReviewCheckIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9zdFxSZXZpZXdDaGVja0luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ashle/OneDrive/Documents/GitHub/Staybnb/src/Views/Notifications/Index.cshtml]

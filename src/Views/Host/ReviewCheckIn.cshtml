@@ -1,0 +1,64 @@
+@model Staybnb.Models.GuestCheckIn
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Review Check-in";
+    var b = Model.Booking!;
+}
+
+<a asp-action="CheckIns" class="text-decoration-none">&larr; Back to check-ins</a>
+
+<h1 class="h3 mt-2 mb-1">@b.Guest?.FullName</h1>
+<p class="text-muted">@b.Property?.Title &middot; @b.CheckInDate.ToString("dd MMM") to @b.CheckOutDate.ToString("dd MMM yyyy") &middot; Check-in status: <strong>@Model.Status</strong></p>
+
+@if (Model.Status != CheckInStatus.Submitted)
+{
+    <div class="alert alert-light border">
+        @(Model.Status == CheckInStatus.Verified
+            ? "All documents are verified and the guest is checked in."
+            : "Waiting for the guest. You can verify documents once they submit the check-in.")
+    </div>
+}
+
+<div class="row g-3">
+@foreach (var d in Model.Documents)
+{
+    var isPdf = d.FileName.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase);
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <h2 class="h6 mb-0">@d.DocumentType</h2>
+                    <span class="badge @(d.Status == DocumentStatus.Verified ? "bg-success" : d.Status == DocumentStatus.Rejected ? "bg-danger" : "bg-warning text-dark")">@d.Status</span>
+                </div>
+
+                @if (!isPdf)
+                {
+                    <a asp-controller="GuestDocuments" asp-action="Download" asp-route-id="@d.Id" target="_blank">
+                        <img src="@Url.Action("Download", "GuestDocuments", new { id = d.Id })" alt="@d.DocumentType"
+                             class="img-fluid rounded border mb-2" style="max-height:260px;object-fit:contain" />
+                    </a>
+                }
+                <div class="mb-2"><a asp-controller="GuestDocuments" asp-action="Download" asp-route-id="@d.Id" target="_blank">Open document</a></div>
+
+                @if (Model.Status == CheckInStatus.Submitted && d.Status == DocumentStatus.Pending)
+                {
+                    <div class="d-flex gap-2">
+                        <form asp-action="VerifyDocument" asp-route-id="@d.Id" method="post">
+                            <button type="submit" class="btn btn-sm btn-success">Verify</button>
+                        </form>
+                        <form asp-action="RejectDocument" asp-route-id="@d.Id" method="post"
+                              onsubmit="return confirm('Reject this document? The guest will need to upload it again.');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Reject</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+@if (!Model.Documents.Any())
+{
+    <div class="col-12 text-muted">No documents uploaded yet.</div>
+}
+</div>

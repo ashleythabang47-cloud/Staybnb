@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Staybnb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a875dd0b345dcab84e525185ec44e4ac7ff8d7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+65c7751ba5574931e1b2a8b3dc6b4eac6a930806")]
 [assembly: System.Reflection.AssemblyProductAttribute("Staybnb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Staybnb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

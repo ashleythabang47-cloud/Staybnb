@@ -1,0 +1,59 @@
+@model List<Staybnb.Models.GuestCheckIn>
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Guest Check-ins";
+    var current = ViewData["CurrentStatus"]?.ToString() ?? "All";
+}
+
+<h1 class="h3 mb-3">Guest Check-ins</h1>
+
+<ul class="nav nav-pills mb-3">
+    @foreach (var tab in new[] { "All", "Submitted", "InProgress", "Rejected", "Verified" })
+    {
+        <li class="nav-item">
+            <a class="nav-link @(current == tab ? "active bg-danger" : "text-dark")"
+               asp-action="CheckIns" asp-route-status="@(tab == "All" ? null : tab)">@tab</a>
+        </li>
+    }
+</ul>
+
+<div class="table-responsive">
+    <table class="table align-middle">
+        <thead>
+            <tr><th>Guest</th><th>Property</th><th>Dates</th><th>Documents</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Booking?.Guest?.FullName<br /><span class="small text-muted">@c.Booking?.Guest?.Email</span></td>
+                <td>@c.Booking?.Property?.Title</td>
+                <td>@c.Booking?.CheckInDate.ToString("dd MMM") to @c.Booking?.CheckOutDate.ToString("dd MMM yyyy")</td>
+                <td>@c.Documents.Count</td>
+                <td>
+                    @switch (c.Status)
+                    {
+                        case CheckInStatus.Submitted:
+                            <span class="badge bg-warning text-dark">Waiting for you</span>
+                            break;
+                        case CheckInStatus.Verified:
+                            <span class="badge bg-success">Verified</span>
+                            break;
+                        case CheckInStatus.Rejected:
+                            <span class="badge bg-danger">Rejected</span>
+                            break;
+                        default:
+                            <span class="badge bg-secondary">In progress</span>
+                            break;
+                    }
+                </td>
+                <td><a class="btn btn-sm btn-outline-dark" asp-action="ReviewCheckIn" asp-route-id="@c.Id">Review</a></td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr><td colspan="6" class="text-center text-muted py-4">No check-ins found.</td></tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -387,6 +387,132 @@ namespace Staybnb.Controllers
             return RedirectToAction(nameof(BookingRequests));
         }
 
+        // ---------- Guest check-ins (verify documents) ----------
+
+        public async Task<IActionResult> CheckIns(string? status)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            var query = _db.GuestCheckIns
+                .Include(c => c.Booking).ThenInclude(b => b!.Guest)
+                .Include(c => c.Booking).ThenInclude(b => b!.Property)
+                .Include(c => c.Documents)
+                .Where(c => c.Booking!.Property!.HostId == hostId && c.Status != CheckInStatus.NotStarted);
+
+            if (Enum.TryParse<CheckInStatus>(status, true, out var parsed))
+                query = query.Where(c => c.Status == parsed);
+
+            ViewData["CurrentStatus"] = status ?? "All";
+
+            var list = await query.OrderByDescending(c => c.Id).ToListAsync();
+            return View(list);
+        }
+
+        public async Task<IActionResult> ReviewCheckIn(int id)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            var checkIn = await _db.GuestCheckIns
+                .Include(c => c.Booking).ThenInclude(b => b!.Guest)
+                .Include(c => c.Booking).ThenInclude(b => b!.Property)
+                .Include(c => c.CheckInProcess)
+                .Include(c => c.Documents)
+                .FirstOrDefaultAsync(c => c.Id == id && c.Booking!.Property!.HostId == hostId);
+
+            if (checkIn == null)
+                return NotFound();
+
+            return View(checkIn);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyDocument(int id)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            var doc = await _db.GuestDocuments
+                .Include(d => d.GuestCheckIn).ThenInclude(c => c!.Documents)
+                .Include(d => d.GuestCheckIn).ThenInclude(c => c!.Booking).ThenInclude(b => b!.Property)
+                .FirstOrDefaultAsync(d => d.Id == id && d.GuestCheckIn!.Booking!.Property!.HostId == hostId);
+
+            if (doc == null)
+                return NotFound();
+
+            var checkIn = doc.GuestCheckIn!;
+            var booking = checkIn.Booking!;
+
+            if (checkIn.Status != CheckInStatus.Submitted || doc.Status != DocumentStatus.Pending)
+            {
+                TempData["Error"] = "This document is not waiting for verification.";
+                return RedirectToAction(nameof(ReviewCheckIn), new { id = checkIn.Id });
+            }
+
+            doc.Status = DocumentStatus.Verified;
+
+            // When every document is verified the guest is checked in
+            if (checkIn.Documents.All(d => d.Status == DocumentStatus.Verified))
+            {
+                checkIn.Status = CheckInStatus.Verified;
+                booking.Status = BookingStatus.CheckedIn;
+            }
+
+            await _db.SaveChangesAsync();
+
+            await _log.LogAsync(hostId, $"Document '{doc.DocumentType}' verified for booking #{booking.Id}", ActivityType.CheckIn);
+
+            if (checkIn.Status == CheckInStatus.Verified)
+            {
+                await _log.LogAsync(hostId, $"Booking #{booking.Id} status: CheckedIn", ActivityType.BookingStatusChange);
+                await _notifications.NotifyAsync(booking.GuestId, "Check-in complete",
+                    $"Your documents for '{booking.Property?.Title}' were verified. You are checked in!",
+                    NotificationType.Success);
+                TempData["Success"] = "All documents verified. The guest is now checked in.";
+            }
+            else
+            {
+                TempData["Success"] = "Document verified.";
+            }
+
+            return RedirectToAction(nameof(ReviewCheckIn), new { id = checkIn.Id });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectDocument(int id)
+        {
+            var hostId = _userManager.GetUserId(User)!;
+
+            var doc = await _db.GuestDocuments
+                .Include(d => d.GuestCheckIn).ThenInclude(c => c!.Booking).ThenInclude(b => b!.Property)
+                .FirstOrDefaultAsync(d => d.Id == id && d.GuestCheckIn!.Booking!.Property!.HostId == hostId);
+
+            if (doc == null)
+                return NotFound();
+
+            var checkIn = doc.GuestCheckIn!;
+            var booking = checkIn.Booking!;
+
+            if (checkIn.Status != CheckInStatus.Submitted || doc.Status != DocumentStatus.Pending)
+            {
+                TempData["Error"] = "This document is not waiting for verification.";
+                return RedirectToAction(nameof(ReviewCheckIn), new { id = checkIn.Id });
+            }
+
+            doc.Status = DocumentStatus.Rejected;
+            checkIn.Status = CheckInStatus.Rejected; // guest must upload a new document
+
+            await _db.SaveChangesAsync();
+
+            await _log.LogAsync(hostId, $"Document '{doc.DocumentType}' rejected for booking #{booking.Id}", ActivityType.CheckIn);
+            await _notifications.NotifyAsync(booking.GuestId, "Check-in document rejected",
+                $"Your '{doc.DocumentType}' for '{booking.Property?.Title}' was rejected. Please upload a clearer copy.",
+                NotificationType.Warning);
+
+            TempData["Success"] = "Document rejected. The guest was asked to upload it again.";
+            return RedirectToAction(nameof(ReviewCheckIn), new { id = checkIn.Id });
+        }
+
         // ---------- helpers ----------
 
         private static List<string> SplitLines(string? text)

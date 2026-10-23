@@ -1,0 +1,11 @@
+@model int
+@{
+    var steps = new[] { "1. House rules", "2. Documents", "3. Review & submit" };
+}
+
+<div class="d-flex gap-2 mb-4 flex-wrap">
+    @for (var i = 0; i < steps.Length; i++)
+    {
+        <span class="badge @(Model == i + 1 ? "bg-danger" : "bg-light text-dark border") fs-6 fw-normal">@steps[i]</span>
+    }
+</div>

@@ -1,0 +1,69 @@
+@model Staybnb.ViewModels.CheckInFlowViewModel
+@using Staybnb.Models.Enums
+@{
+    ViewData["Title"] = "Check-in: review";
+    var b = Model.Booking;
+    var checkIn = Model.CheckIn!;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h3 mb-1">Review your check-in</h1>
+        <p class="text-muted">@b.Property?.Title &middot; @b.CheckInDate.ToString("dd MMM") to @b.CheckOutDate.ToString("dd MMM yyyy")</p>
+
+        <partial name="_Steps" model="3" />
+
+        @switch (checkIn.Status)
+        {
+            case CheckInStatus.Submitted:
+                <div class="alert alert-info">Submitted. Your host is verifying your documents.</div>
+                break;
+            case CheckInStatus.Verified:
+                <div class="alert alert-success">Verified. You are checked in. Enjoy your stay!</div>
+                break;
+            case CheckInStatus.Rejected:
+                <div class="alert alert-warning">A document was rejected. Please upload it again and submit.</div>
+                break;
+            default:
+                <div class="alert alert-light border">Not submitted yet.</div>
+                break;
+        }
+
+        <div class="card mb-3">
+            <ul class="list-group list-group-flush">
+            @foreach (var type in Model.Config.Documents)
+            {
+                var doc = checkIn.Documents.FirstOrDefault(d => d.DocumentType == type);
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@type</span>
+                    @if (doc == null)
+                    {
+                        <span class="badge bg-secondary">Missing</span>
+                    }
+                    else
+                    {
+                        <span>
+                            <a asp-controller="GuestDocuments" asp-action="Download" asp-route-id="@doc.Id" target="_blank" class="me-2 small">view</a>
+                            <span class="badge @(doc.Status == DocumentStatus.Verified ? "bg-success" : doc.Status == DocumentStatus.Rejected ? "bg-danger" : "bg-warning text-dark")">@doc.Status</span>
+                        </span>
+                    }
+                </li>
+            }
+            </ul>
+        </div>
+
+        @if (Model.CanSubmit)
+        {
+            <form asp-controller="CheckIn" asp-action="Submit" method="post" class="d-inline">
+                <input type="hidden" name="bookingId" value="@b.Id" />
+                <button type="submit" class="btn btn-danger">Submit check-in</button>
+            </form>
+            <a class="btn btn-outline-secondary" asp-action="Documents" asp-route-bookingId="@b.Id">Change documents</a>
+        }
+        else if (checkIn.Status == CheckInStatus.InProgress || checkIn.Status == CheckInStatus.Rejected)
+        {
+            <a class="btn btn-danger" asp-action="Documents" asp-route-bookingId="@b.Id">Upload documents</a>
+        }
+        <a class="btn btn-outline-secondary" asp-controller="Bookings" asp-action="Index">My bookings</a>
+    </div>
+</div>
